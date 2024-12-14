@@ -1,4 +1,4 @@
-# README: Thompson Sampling for Movie Recommendation
+# Thompson Sampling for Movie Recommendation
 
 This README outlines the step-by-step roadmap to successfully complete the project "Bandits de Thompson" for identifying the most popular movie using Thompson Sampling. The project involves theoretical explanations, practical implementation, and analysis of results.
 
