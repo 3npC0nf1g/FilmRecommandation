@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from UserFeedbackSimulator import UserFeedbackSimulator
-from ThompsonSampling import ThompsonSampling
+from user_feedback_simulator import UserFeedbackSimulator
+from thompson_sampling import ThompsonSampling
 
 
 # Classe principale pour orchestrer l'expérience

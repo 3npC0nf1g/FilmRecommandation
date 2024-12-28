@@ -1,7 +1,6 @@
 import numpy as np
 
 # Classe pour la simulation des feedbacks utilisateurs
-
 class UserFeedbackSimulator:
     def __init__(self, n_movies, seed=42):
         np.random.seed(seed)  # Fixer la graine pour reproductibilité
