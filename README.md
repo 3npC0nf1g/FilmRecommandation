@@ -1,107 +1,108 @@
-# **Thompson Sampling for Movie Recommendation**
+# Movie Recommendation System with Thompson Sampling
 
-## **1. Project Overview**
-This project implements a **movie recommendation system** using the **Thompson Sampling algorithm**. The goal is to identify the most popular movie with minimal user feedback, modeled as a **multi-armed bandit problem**.
+## Overview
 
-The system supports two modes:
-1. **Simulated Feedback Mode** - Generates synthetic user feedback based on predefined probabilities.
-2. **Dynamic Feedback Mode** - Collects real-time user feedback through the command line.
+This project implements an intelligent movie recommendation system using Thompson Sampling algorithm with a 5-star rating system. It's designed to learn from user preferences and optimize movie recommendations over time.
 
-It also tracks metrics like **cumulative regret** and **rewards** to evaluate performance.
+## Features
 
----
+- 🌟 5-star rating system (1-5 stars)
+- 🔄 Two operating modes: Simulation and Interactive
+- 📊 Real-time performance visualization
+- 📈 Detailed statistics and movie rankings
+- 🎯 Adaptive learning through Thompson Sampling
 
-## **2. How It Works**
+## Requirements
 
-### **2.1 Problem Definition**
-- Each movie is treated as an **arm** in the bandit problem.
-- Users provide binary feedback:
-  - **1** = Liked the movie.
-  - **0** = Disliked the movie.
-- The objective is to identify the movie with the **highest reward probability** while minimizing the number of trials.
-
-### **2.2 Thompson Sampling Algorithm**
-- Uses Bayesian inference to balance **exploration** (trying less-known movies) and **exploitation** (selecting movies likely to be popular).
-- Updates movie probabilities based on user feedback using **Beta distributions**.
-
-### **2.3 Evaluation Metrics**
-- **Cumulative Reward**: Tracks the total positive feedback received.
-- **Cumulative Regret**: Measures how much reward is lost by not always choosing the optimal movie.
-
----
-
-## **3. Setup Instructions**
-
-### **3.1 Requirements**
-Ensure Python is installed (version 3.7+). Install dependencies:
 ```bash
-pip install numpy pandas matplotlib
+numpy>=1.21.0
+pandas>=1.3.0
+matplotlib>=3.4.0
 ```
 
-### **3.2 Files Needed**
-1. **Movie Data**: A CSV file (`movie.csv`) containing:
-   - `movieId`: Unique identifier for each movie.
-   - `title`: Title of the movie.
-2. **Script**: The Python script implementing the recommendation system.
+## Installation
 
-### **3.3 Running the Script**
+1. Clone the repository:
 ```bash
-python main.py
+git clone https://github.com/3npC0nf1g/movie-recommendation-system.git
+cd movie-recommendation-system
 ```
 
-- **Dynamic Mode**: Choose this option to provide real-time feedback.
-  ```
-  Voulez-vous utiliser le mode dynamique ? (y/n): y
-  Film proposé : Toy Story
-  Avez-vous aimé le film ? (1 pour Oui, 0 pour Non): 1
-  ```
-- **Simulated Mode**: Choose this option for synthetic feedback without manual input.
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
----
+## Project Structure
 
-## **4. Key Components**
+```
+.
+├── README.md
+├── src/
+│   ├── main.py
+│   ├── movie_recommendation_experiment.py
+│   ├── thompson_sampling.py
+│   └── user_feedback_simulator.py
+├── dataset/
+│   └── movie.csv
+└── docs/
+    └── results.md
+```
 
-### **4.1 User Feedback Simulator**
-Simulates user preferences using predefined probabilities to generate binary feedback.
+## Usage
 
-### **4.2 Thompson Sampling Class**
-Implements Bayesian updates to improve recommendations over time.
+Run the main script:
+```bash
+python src/main.py
+```
 
-### **4.3 Movie Recommendation Experiment**
-Coordinates simulations, collects feedback, updates probabilities, and visualizes performance.
+Choose your preferred mode:
+1. **Simulation Mode**: Automated testing with simulated user ratings
+2. **Interactive Mode**: Manual rating system where you can rate movies
 
----
+## Example Output
 
-## **5. Results and Visualizations**
+```
+=== Film le plus populaire ===
+Titre : Movie Title
+Note moyenne : 4.25/5 ★★★★☆
+Nombre de sélections : 25
+Score de popularité : 0.850
 
-### **5.1 Metrics**
-- **Cumulative Reward**: Shows the total positive feedback received during trials.
-- **Cumulative Regret**: Displays lost opportunities when suboptimal movies are selected.
+=== Top 3 des films ===
+1. Movie A
+   Notes: 4.50/5 ★★★★★
+   Sélections: 20
+   Score: 0.800
+```
 
-### **5.2 Visualization**
-Generates a plot to track rewards and regrets over time:
+## Algorithm Details
+
+The Thompson Sampling implementation uses Beta distributions to model movie ratings:
+
 ```python
-plt.plot(cumulative_rewards, label='Cumulative Rewards')
-plt.plot(cumulative_regrets, label='Cumulative Regret')
-plt.legend()
-plt.show()
+def select_arm(self):
+    if np.any(self.counts == 0):
+        return np.random.choice(np.where(self.counts == 0)[0])
+    samples = np.random.beta(self.alpha, self.beta)
+    return np.argmax(samples)
 ```
 
----
+## Performance Metrics
 
-## **6. Future Extensions**
+- **Cumulative Reward**: Sum of normalized ratings
+- **Cumulative Regret**: Difference between optimal and received ratings
+- **Average Rating**: Mean rating per movie
+- **Selection Frequency**: Movie selection distribution
 
-1. **Web-Based UI**:
-   - Replace command-line interaction with a graphical interface.
+## Visualization
 
----
+The system generates plots showing:
+- Cumulative rewards (blue line)
+- Cumulative regret (yellow line)
+- Movie selection distribution
 
-## **7. Conclusion**
-This project demonstrates the effectiveness of **Thompson Sampling** for movie recommendation, balancing exploration and exploitation. It also provides insights into regret minimization and user-centric recommendation strategies.
 
----
-
-## **8. References**
+## References
 - [MoviesLens Dataset](https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset?resource=download&select=tag.csv)
 - [Multi-armed bandits for dynamic movie recommendations](https://blog.insightdatascience.com/multi-armed-bandits-for-dynamic-movie-recommendations-5eb8f325ed1d)
-
