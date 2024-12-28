@@ -8,17 +8,11 @@ class UserFeedbackSimulator:
         self.true_qualities = np.random.beta(2, 2, size=n_movies)  # Distribution plus uniforme
 
     def simulate_feedback(self, movie_index):
-        """
-        Simule une note utilisateur basée sur la qualité réelle du film.
-        """
         quality = self.true_qualities[movie_index]
-
-        # Ajouter du bruit à la note
+        # Ajouter un bruit gaussien pour introduire de l'incertitude
         noisy_quality = np.clip(quality + np.random.normal(0, 0.1), 0, 1)
-
-        # Convertir en note de 1 à 5
         rating = int(np.round(1 + (noisy_quality * 4)))
-        return max(1, min(5, rating))  # Assurer que la note est entre 1 et 5
+        return max(1, min(5, rating))
 
     def dynamic_feedback(self, movie_title):
         while True:
