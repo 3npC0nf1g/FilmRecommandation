@@ -82,8 +82,10 @@ The Thompson Sampling implementation uses Beta distributions to model movie rati
 
 ```python
 def select_arm(self):
-    if np.any(self.counts == 0):
-        return np.random.choice(np.where(self.counts == 0)[0])
+    # Calculate confidence intervals
+    lower_bounds, upper_bounds = self.get_confidence_bounds()
+    
+    # Sample from Beta distribution
     samples = np.random.beta(self.alpha, self.beta)
     return np.argmax(samples)
 ```
