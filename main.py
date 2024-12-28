@@ -1,16 +1,18 @@
-# This is a sample Python script.
+import pandas as pd
+from MovieRecommendationExperiment import MovieRecommendationExperiment
+# Charger les données des films uniquement
+movies = pd.read_csv('dataset/movie.csv')  # Données sur les films
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Filtrer les films ayant un seuil arbitraire (ex. > 20000) comme critère de popularité présumée
+popular_movies = movies['movieId'][:50]  # Exemple : on prend les 50 premiers films (aucune évaluation initiale)
+movie_list = movies[movies['movieId'].isin(popular_movies)]
+
+# Afficher le nombre de films populaires sélectionnés
+print(f"Nombre de films populaires : {len(movie_list)}")
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Lancer l'expérience
+experiment = MovieRecommendationExperiment(movie_list)
+rewards, chosen_arms = experiment.run_experiment()
+experiment.plot_results(rewards)
+experiment.display_most_popular_movie(chosen_arms)

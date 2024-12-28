@@ -1,30 +1,5 @@
 # Thompson Sampling for Movie Recommendation
 
-This README outlines the step-by-step roadmap to successfully complete the project "Bandits de Thompson" for identifying the most popular movie using Thompson Sampling. The project involves theoretical explanations, practical implementation, and analysis of results.
-
----
-
-## **1. Theoretical Overview**
-
-### **1.1 Explaining Thompson Sampling**
-- **Objective**: Understand and explain the principle of Thompson Sampling.
-- **Steps**:
-  1. Define the multi-armed bandit problem:
-     - Each arm represents a movie.
-     - Rewards correspond to user feedback (e.g., like or dislike).
-  2. Describe Thompson Sampling:
-     - Use Bayesian inference to maintain a probability distribution over the reward probabilities of each movie.
-     - Sample from these distributions to decide which movie to recommend.
-  3. Provide an example:
-     - Simplify with a two-arm scenario, e.g., comparing two movies based on user ratings.
-
-### **1.2 Regret Bounds**
-- **Objective**: Show how Thompson Sampling minimizes regret.
-- **Steps**:
-  1. Define regret in the context of the bandit problem (e.g., loss due to not always recommending the most popular movie).
-  2. Briefly explain why Thompson Sampling achieves logarithmic regret (cite references if needed).
-  3. Focus on an intuitive explanation rather than detailed proofs.
-
 ---
 
 ## **2. Practical Implementation**
