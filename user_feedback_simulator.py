@@ -8,3 +8,7 @@ class UserFeedbackSimulator:
 
     def simulate_feedback(self, movie_index):
         return np.random.binomial(1, self.true_rewards[movie_index])
+
+    def dynamic_feedback(self):
+        response = input("Avez-vous aimé le film ? (1 pour Oui, 0 pour Non): ")
+        return int(response)
